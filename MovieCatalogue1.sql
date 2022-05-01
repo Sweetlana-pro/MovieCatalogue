@@ -25,4 +25,37 @@ create table if not exists `Actor` (
     `BirthDate` date,
     primary key (`ActorID`)
 );
+create table if not exists `Movie` (
+    `MovieID` int not null auto_increment,
+    `GenreID` int not null,
+    foreign key fk_MovieGenre (`GenreID`)
+       references `Genre` (`GenreID`),
+	`DirectorID` int not null, 
+        foreign key fk_MovieDirector (`DirectorID`)
+        references `Director` (`DirectorID`),
+	`RatingID` int not null,
+	    foreign key fk_MovieRating (`RatingID`)
+        references `Rating` (`RatingID`),
+	`Title` varchar(128) not null,
+    `ReleaseDate` date,
+    primary key (`MovieID`)
+);
+create table if not exists `CastMember` (
+    `CastMemberID` int not null auto_increment,
+	`ActorID` int not null,
+        foreign key fk_CastMemberActor(`ActorID`)
+        references `Actor`(`ActorID`),
+	`MovieID` int not null,
+        foreign key fk_CastMemberMovie(`MovieID`)
+        references `Movie` (`MovieID`),
+	`Role` varchar(50) not null,
+    primary key (`CastMemberID`)
+);
+    
 
+
+        
+	
+       
+       
+       
