@@ -1,68 +1,68 @@
-Create database if not exists MovieCatalogue;
-use MovieCatalogue;
-create table `Genre` (
-    `GenreID` int not null auto_increment,
-    `GenreName` varchar(30) not null,
-    primary key (`GenreID`)
+CREATE DATABASE IF NOT EXISTS MovieCatalogue;
+USE MovieCatalogue;
+CREATE TABLE `Genre` (
+    `GenreID` INT NOT NULL AUTO_INCREMENT,
+    `GenreName` VARCHAR(30) NOT NULL,
+    PRIMARY KEY (`GenreID`)
 );
 
-create table if not exists `Director` (
-    `DirectorID` int not null auto_increment,
-    `FirstName` varchar(30) not null,
-    `LastName` varchar(30) not null,
-    `BirthDate` date null,
-    primary key (`DirectorID`)
+CREATE TABLE IF NOT EXISTS `Director` (
+    `DirectorID` INT NOT NULL AUTO_INCREMENT,
+    `FirstName` VARCHAR(30) NOT NULL,
+    `LastName` VARCHAR(30) NOT NULL,
+    `BirthDate` DATE NULL,
+    PRIMARY KEY (`DirectorID`)
 );
-create table if not exists `Rating` (
-	`RatingID` int not null auto_increment,
-    `RatingName` char(5) not null,
-    primary key (`RatingID`)
+CREATE TABLE IF NOT EXISTS `Rating` (
+	`RatingID` INT NOT NULL AUTO_INCREMENT,
+    `RatingName` CHAR(5) NOT NULL,
+    PRIMARY KEY (`RatingID`)
 );
-create table if not exists `Actor` (
-	`ActorID` int not null auto_increment,
-    `FirstName` varchar(30) not null,
-    `LastName` varchar(30) not null,
-    `BirthDate` date,
-    primary key (`ActorID`)
+CREATE TABLE IF NOT EXISTS `Actor` (
+	`ActorID` INT NOT NULL AUTO_INCREMENT,
+    `FirstName` VARCHAR(30) NOT NULL,
+    `LastName` VARCHAR(30) NOT NULL,
+    `BirthDate` DATE,
+    PRIMARY KEY (`ActorID`)
 );
-create table if not exists `Movie` (
-    `MovieID` int not null auto_increment,
-    `GenreID` int not null,
-    foreign key fk_MovieGenre (`GenreID`)
-       references `Genre` (`GenreID`),
-	`DirectorID` int not null, 
-        foreign key fk_MovieDirector (`DirectorID`)
-        references `Director` (`DirectorID`),
-	`RatingID` int not null,
-	    foreign key fk_MovieRating (`RatingID`)
-        references `Rating` (`RatingID`),
-	`Title` varchar(128) not null,
-    `ReleaseDate` date,
-    primary key (`MovieID`)
+CREATE TABLE IF NOT EXISTS `Movie` (
+    `MovieID` INT NOT NULL AUTO_INCREMENT,
+    `GenreID` INT NOT NULL,
+    FOREIGN KEY fk_MovieGenre (`GenreID`)
+       REFERENCES `Genre` (`GenreID`),
+	`DirectorID` INT NOT NULL, 
+        FOREIGN KEY fk_MovieDirector (`DirectorID`)
+        REFERENCES `Director` (`DirectorID`),
+	`RatingID` INT NOT NULL,
+	    FOREIGN KEY fk_MovieRating (`RatingID`)
+        REFERENCES `Rating` (`RatingID`),
+	`Title` VARCHAR(128) NOT NULL,
+    `ReleaseDate` DATE,
+    PRIMARY KEY (`MovieID`)
 );
-create table if not exists `CastMember` (
-    `CastMemberID` int not null auto_increment,
-	`ActorID` int not null,
-        foreign key fk_CastMemberActor(`ActorID`)
-        references `Actor`(`ActorID`),
-	`MovieID` int not null,
-        foreign key fk_CastMemberMovie(`MovieID`)
-        references `Movie` (`MovieID`),
-	`Role` varchar(50) not null,
-    primary key (`CastMemberID`)
+CREATE TABLE IF NOT EXISTS `CastMember` (
+    `CastMemberID` INT NOT NULL AUTO_INCREMENT,
+	`ActorID` INT NOT NULL,
+        FOREIGN KEY fk_CastMemberActor(`ActorID`)
+        REFERENCES `Actor`(`ActorID`),
+	`MovieID` INT NOT NULL,
+        FOREIGN KEY fk_CastMemberMovie(`MovieID`)
+        REFERENCES `Movie` (`MovieID`),
+	`Role` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`CastMemberID`)
 );
 SELECT * FROM MovieCatalogue;
 INSERT INTO Actor (ActorID, FirstName, LastName, BirthDate)
     VALUES (1, 'Bill', 'Murray', '1950/09/21'),
     (2, 'Dan', 'Aykroyd', '1952/07/01'),
     (3, 'John', 'Candy', '1950/10/31'),
-    (4, 'Steve', 'Martin', null),
+    (4, 'Steve', 'Martin', NULL),
     (5, 'Sylvester', 'Stalllone', NULL);
 
 SELECT * FROM Actor;
 INSERT INTO Director(DirectorID, FirstName, LastName, BirthDate)
     VALUES (1, 'Ivan', 'Reitman', '1946/10/27'),
-    (2, 'Ted', 'Kotcheff', null);
+    (2, 'Ted', 'Kotcheff', NULL);
     
 INSERT INTO Rating (RatingID, RatingName)
 VALUES (1, 'G'),
@@ -124,6 +124,10 @@ WHERE ActorID = 3;
 
 SELECT * FROM Actor;
 
+INSERT INTO Director(DirectorID, FirstName, LastName, BirthDate)
+    VALUES (3, 'Orson', 'Welles', '1998/10/27');
+    
+SELECT * FROM Director;
 
 
 
